@@ -1,23 +1,45 @@
 <p>
-    <i>( Describe task in general )</i>
+    To describe a position on the Earth the most commonly using system is
+    <a href="http://en.wikipedia.org/wiki/Geographic_coordinate_system">a geographic coordinate system</a>.
+    The geographic coordinate system is a coordinate system that enables
+    every location on the Earth to be specified by a set of numbers or letters.
+    A common choice of coordinates is <a href="http://en.wikipedia.org/wiki/Latitude">latitude</a>
+    and <a href="http://en.wikipedia.org/wiki/Longitude">longitude</a>.
+    With this information we can calculate a distance between two points along a surface.
 </p>
 
 <p>
-    Sum two passed ints
-</p>
-
-<p style="text-align: center;">
-    <img class="for_info_only" title="example" src="{{MEDIA}}example.png" alt="example" width="392px"/>
-    <img class="for_editor_only" title="example" src="{{MEDIA}}example.png" alt="example" width="380px"/>
-</p>
-
-<p><i>( Explain input and output values )</i></p>
-<p>
-    <strong>Input: </strong> Two arguments. Both are int
+    For simplicity we will suppose that Earth is a perfect sphere with radius 6371 kilometers (earth mean radius).
+    You are given two point coordinates and you should find
+    the shortest distance between these points on the surface of the Earth,
+    measured along the surface of the Earth.
 </p>
 
 <p>
-    <strong>Output: </strong> Int. 
+    Coordinates are given as a strings with latitude and longitude separated by whitespace.
+    Latitude and longitude are represented in the follow format:
+</p>
+
+<pre>
+    d°m's"X
+</pre>
+<br>
+<p>
+    where "d" is degrees, "m" is minutes, "s" is seconds as integers.
+    And "X" is "N" (north) or "S" (south) for a latitude and
+    "W" (west) or "E" (east) for a longitude.
+</p>
+
+<p>
+    The result should be given as a number by kilometers with precision &plusmn;0.001.
+        </p>
+
+<p>
+    <strong>Input: </strong> Two arguments. Coordinates as strings (unicode).
+</p>
+
+<p>
+    <strong>Output: </strong> The distance as a number (int or float).
 </p>
 
 
@@ -28,17 +50,16 @@
         <strong>Example:</strong>
     </p>
     <pre class="brush: python">
-checkio(3, 2) == 5
-checkio(5, 7) == 12
+distance(TODO)
     </pre>
 </div>
 
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    <i>(Here you can explain how it can be used in development and what is usage of this.)</i>
+    This method can be used to estimate a distance for air or sea navigation.
 </p>
 
 <p>
     <strong>Precondition:</strong>
-    <i>Constraints for Input</i>
+    Coordinates are correct.
 </p>
