@@ -40,10 +40,10 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210', 'snap.svg_030'],
             }
 
             //YOUR FUNCTION NAME
-            var fname = 'checkio';
+            var fname = 'distance';
 
-            var checkioInput = data.in;
-            var checkioInputStr = fname + '(' + JSON.stringify(checkioInput) + ')';
+            var checkioInput = data.in || ["51°28′48″N 0°0′0″E", "46°12′0″N, 6°9′0″E"];
+            var checkioInputStr = fname + '(' + JSON.stringify(checkioInput[0]) + "," + JSON.stringify(checkioInput[1]) + ')';
 
             var failError = function (dError) {
                 $content.find('.call').html(checkioInputStr);
@@ -80,7 +80,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210', 'snap.svg_030'],
                 var explanation = data.ext["explanation"];
                 $content.find('.output').html('&nbsp;Your result:&nbsp;' + JSON.stringify(userResult));
                 if (!result) {
-                    $content.find('.answer').html('Right result:&nbsp;' + JSON.stringify(rightResult));
+                    $content.find('.answer').html('Right result:&nbsp;' + JSON.stringify(Math.round(rightResult * 10) / 10));
                     $content.find('.answer').addClass('error');
                     $content.find('.output').addClass('error');
                     $content.find('.call').addClass('error');
