@@ -43,7 +43,7 @@ requirejs(['ext_editor_1', 'jquery_190', 'raphael_210', 'snap.svg_030'],
             var fname = 'distance';
 
             var checkioInput = data.in || ["51°28′48″N 0°0′0″E", "46°12′0″N, 6°9′0″E"];
-            var checkioInputStr = fname + '(' + JSON.stringify(checkioInput[0]) + "," + JSON.stringify(checkioInput[1]) + ')';
+            var checkioInputStr = fname + '(u' + JSON.stringify(checkioInput[0]) + ", u" + JSON.stringify(checkioInput[1]) + ')';
 
             var failError = function (dError) {
                 $content.find('.call').html(checkioInputStr);
