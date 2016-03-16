@@ -1,20 +1,29 @@
 <p>
     A ring topology is a network configuration where the devices are connected to each other in a circular shape.
-    Optical rings are widely used in mobile networks, to transport the traffic from the fronthaul 
-    <a href="http://en.wikipedia.org/wiki/Geographic_coordinate_system">geographic coordinate
-        system</a>.
-    The geographic coordinate system is a method used to give every possible location on Earth to be
-    specified by a set of numbers or letters. A common choice of coordinates is <a
-        href="http://en.wikipedia.org/wiki/Latitude">latitude</a>
-    and <a href="http://en.wikipedia.org/wiki/Longitude">longitude</a>.
-    With this information we can calculate a distance between two points along a surface.
+    Optical rings are widely used in mobile networks, to transport the traffic from the base station to the backbone, through the mobile backhaul.
+</p>
+    
+<p style="text-align: center;">
+    <img class="for_info_only"
+         title="ITU backhaul with rings"
+         src="{{MEDIA}}ring-itu.png"
+         alt="ITU backhaul with rings"
+         width="327px"/>
 </p>
 
 <p>
-    For simplicity’s sake, we will suppose that the Earth is a perfect sphere with a radius of 6,371
-    kilometers (it gives a mistake no more than 0.3%).
-    You are given two point coordinates and you must find the shortest distance between
-    these points on the surface of the Earth, measured along the surface of the Earth.
+    For the sake of simplicity, in this task, we define a ring as a connex graph which vertexes have a degree 2 and are connected to two distinct vertexes.
+    This ensures that there is a single link between each pair of adjacent nodes. 
+    Ring are represented as a string made of distinct letters, which position in the string is also the position in the ring.
+    For instance, the ring "AEFCBG" defines the following topology:
+</p>
+
+<p style="text-align: center;">
+    <img class="for_info_only"
+         title="ring definition"
+         src="{{MEDIA}}ring-def.PNG"
+         alt="ring definition"
+         width="327px"/>
 </p>
 
 <p>
