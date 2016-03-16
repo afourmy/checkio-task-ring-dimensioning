@@ -27,8 +27,23 @@
 </p>
 
 <p>
-    Coordinates are given as a string with the latitude and longitude separated by comma and/or whitespace.
-    Latitude and longitude are represented in the follow format:
+    Multiple traffic flows will be routed on the ring. A traffic flow is represented as a couple (s, dr) where s is a string of length 2, containing the ingress node and the egress node, and dr is the data rate in Gbps (gigabit per second).
+    Each flow will be routed on the shortest path from the ingress node to the egress node. If there are two shortest paths, the path which order fits the ring definition will be kept.
+    Let's consider the following situation:
+</p>
+
+<p style="text-align: center;">
+    <img class="for_info_only"
+         title="paths along the ring"
+         src="{{MEDIA}}ring-paths.PNG"
+         alt="paths along the ring"
+         width="327px"/>
+</p>
+
+<p>
+    The path from A to B (and vice versa) will be "A - G - B", because it uses only two links, while the path going the other way around ("A - E - F - C - B") uses five links.
+    However, there are two paths of equal length to go from A to C: "A - E - F - C" and "A - G - B - C". The first one, "A - E - F - C", will be kept: it is the same order as in the ring definition (AEFCBG").
+    The traffic from C to A will use the path "C - B - G - A": the routing is asymmetric in that case.
 </p>
 
 <pre>
