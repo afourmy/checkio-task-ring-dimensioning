@@ -12,8 +12,14 @@
 </p>
 
 <p>
-    For the sake of simplicity, in this task, we define a ring as a connex graph which vertexes have a degree 2 and are connected to two distinct vertexes.
-    This ensures that there is a single link between each pair of adjacent nodes. 
+    For the sake of simplicity, in this task, we define a ring as a connex graph which vertexes:
+    <br><br>
+	<ol>
+		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- have a degree <strong>2</strong>, which means there are <strong>2</strong> incident edges.</li>
+		<li style="padding-left: 10%; width: 80%;">- are connected to two distinct vertexes</li>
+	</ol>
+    
+    These two conditions ensure that there is a single link between each pair of adjacent nodes. 
     Ring are represented as a string made of distinct letters, which position in the string is also the position in the ring.
     For instance, the ring "AEFCBG" defines the following topology:
 </p>
@@ -25,11 +31,11 @@
          alt="ring definition"
          width="500px"/>
 </p>
-
+<h3>Shortest path asymmetric routing</h3>
 <p>
-    Multiple traffic flows will be routed on the ring. A traffic flow is represented as a couple (s, dr) where s is a string of length 2, containing the ingress node and the egress node, and dr is the data rate in Gbps (gigabit per second).
-    Each flow will be routed on the shortest path from the ingress node to the egress node. If there are two shortest paths, the path which order fits the ring definition will be kept.
-    Let's consider the following situation:
+    Multiple traffic flows will be routed on the ring. <br>
+    Each flow will be routed on the shortest path from the ingress node to the egress node.<br> If there are two shortest paths, <strong>the path which order fits the ring definition will be kept.</strong>
+    Let's consider the following situation:<br>
 </p>
 
 <p style="text-align: center;">
@@ -44,6 +50,36 @@
     The path from A to B (and vice versa) will be "A - G - B", because it uses only two links, while the path going the other way around ("A - E - F - C - B") uses five links.
     However, there are two paths of equal length to go from A to C: "A - E - F - C" and "A - G - B - C". The first one, "A - E - F - C", will be kept: it is the same order as in the ring definition (AEFCBG").
     The traffic from C to A will use the path "C - B - G - A": the routing is asymmetric in that case.
+</p>
+<h3>Flow aggregation</h3>
+<p>
+    A traffic flow is represented as a couple <strong>(s, dr)</strong> where: 
+        <br><br>
+	<ol>
+		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- <strong>s</strong> is a string of length 2, containing the <strong>ingress node</strong> (starting point of the traffic) and the <strong>egress node</strong> (exit point of the traffic).</li>
+		<li style="padding-left: 10%; width: 80%;">- <strong>dr</strong> is the data rate in Gbps (gigabit per second).</li>
+	</ol><br>
+    The data rate of a traffic flow will be counted for all the links of the shortest path. A traffic flow ("AB", 5) means that 5 Gbps will be routed on the shortest path from A to C. 
+    We will count 5 Gbps on the link "AG" and 5 Gbps on the link "GB". For a traffic flow ("CA", 15), we will count 15 Gbps on the links "CB", "BG", and "GA".
+    Given a list of traffic flows, we consider the resulting bandwidth for each link of the ring.
+</p>
+
+<h3>Ethernet links dimensioning</h3>
+<p>
+    There are five main types of Ethernet links used in mobile networks:
+            <br><br>
+	<ol>
+		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- <strong>Fast Ethernet</strong> (FE): 100 Mbps (or 0.1 Gbps) </li>
+		<li style="padding-left: 10%; width: 80%;">- <strong>Gigabit Ethernet</strong> (GE): 1 Gbps.</li>
+		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- <strong>10 Gigabit Ethernet</strong> (FE): 10 Gbps </li>
+		<li style="padding-left: 10%; width: 80%;">- <strong>40 Gigabit Ethernet</strong> (40GE): 40 Gbps.</li>
+		<li style="padding-left: 10%; width: 80%;">- <strong>100 Gigabit Ethernet</strong> (100GE): 100 Gbps.</li>
+	</ol><br>
+</p>
+<p>
+    In order to define which type of link we use, we look for the smallest bandwidth allowing to carry the whole traffic with a single link.
+    Handling a 5-Gbps traffic would require 50 FE links, 5 GE links, or 1 10GE link. Therefore, a 10GE Ethernet link will be used.
+    For a 15-Gbps traffic, a 40GE Ethernet link would be required.
 </p>
 
 <pre>
