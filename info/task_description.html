@@ -108,7 +108,7 @@
 
 <p>
     <strong>Input: </strong> A variable number of arguments. The first one is a ring, represented as a string where each character is a node. 
-    The remaining arguments are traffic flows, represented as a couple (A, B) where A is a 2-characters string (ingress node, egress node) and B is a integer (traffic in Gbps).
+    The remaining arguments are traffic flows, represented as a couple (s, dr) where A is a 2-characters string (ingress node, egress node) and B is a positive value (traffic in Gbps).
 </p>
 
 <p>
@@ -121,21 +121,21 @@
         <strong>Example:</strong>
     </p>
     <pre class="brush: python">
-distance(u"51°28′48″N 0°0′0″E", u"46°12′0″N, 6°9′0″E") == 739.2
-distance(u"90°0′0″N 0°0′0″E", u"90°0′0″S, 0°0′0″W") == 20015.1</pre>
+checkio("AEFCBG", ("AC", 5), ("EC", 10), ("AB", 60)) == [2, 2, 1, 0, 0]
+checkio("ABCDEFGH", ("AD", 4)) == [0, 0, 3, 0, 0]
+checkio("ABCDEFGH", ("AD", 4), ("EA", 41)) == [4, 0, 3, 0, 0]</pre>
 
 </div>
 <br>
 <br>
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    The concepts presented in this mission are the exact sorts of concepts used in navigational
-    software, enabling a ship or plane to understand where it is, where it must go and how far it
-    has gone. Along the same vein, Global Positioning Satellites use similar principles to
-    provide pinpoint accurate locations to GPS receivers for use in navigation.
+    Dimensioning is used for network planning and design.
+    For real networks, various softwares are used to dimension the network based on the expected traffic load (for pre-sales engineers, when the network does not yet exist), or traffic measurements (for post-sales engineers, to see how much traffic the network can handle). 
 </p>
 
 <p>
     <strong>Precondition:</strong>
-    Correct Coordinates.
+    The ring is a valid ring (connex, 2-degree nodes).
+    The traffic is a positive value (integer or float).
 </p>
