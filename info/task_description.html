@@ -57,7 +57,7 @@
 		<li style="padding-top: 2px; padding-left: 10%; width: 80%;">- <strong>s</strong> is a string of length 2, containing the <strong>ingress node</strong> and the <strong>egress node</strong>.</li>
 		<li style="padding-left: 10%; width: 80%;">- <strong>dr</strong> is the data rate in <strong>Gbps</strong> (gigabit per second).</li>
 	</ol><br>
-    The data rate of a traffic flow will be counted for all the links of the shortest path.<br> A traffic flow <strong>("AB", 5)</strong> means that 5 Gbps will be routed on the shortest path from <strong>A</strong> to <strong>C</strong>. <br>
+    The data rate of a traffic flow will be counted for all the links of the shortest path.<br> A traffic flow <strong>("AB", 5)</strong> means that 5 Gbps will be routed on the shortest path from <strong>A</strong> to <strong>B</strong>. <br>
     We will count 5 Gbps on the link <strong>"AG"</strong> and 5 Gbps on the link <strong>"GB"</strong>. For a traffic flow <strong>("CA", 15)</strong>, we will count 15 Gbps on the links <strong>"CB"</strong>, <strong>"BG"</strong>, and <strong>"GA"</strong>.<br>
     Given a list of traffic flows, we consider the resulting bandwidth for each link of the ring.<br>
 </p>
