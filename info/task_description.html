@@ -11,17 +11,17 @@
          width="700px"/>
 </p>
 
+<h3><u>Definition of a ring</u></h3><br>
 <p>
     For the sake of simplicity, in this task, we define a ring as a connex graph which vertexes:
-    <br><br>
 	<ol>
 		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- have a degree <strong>2</strong>, which means there are <strong>2</strong> incident edges.</li>
 		<li style="padding-left: 10%; width: 80%;">- are connected to two distinct vertexes</li>
 	</ol>
     
     These two conditions ensure that there is a single link between each pair of adjacent nodes. 
-    Ring are represented as a string made of distinct letters, which position in the string is also the position in the ring.
-    For instance, the ring "AEFCBG" defines the following topology:
+    Ring are represented as a string made of distinct letters, <strong>which position in the string reflects the position in the ring.</strong>
+    For instance, the ring <strong>"AEFCBG"</strong> defines the following topology:
 </p>
 
 <p style="text-align: center;">
@@ -31,10 +31,10 @@
          alt="ring definition"
          width="500px"/>
 </p>
-<h3>Shortest path asymmetric routing</h3>
+<h3></u>Shortest path asymmetric routing</u></h3><br>
 <p>
     Multiple traffic flows will be routed on the ring. <br>
-    Each flow will be routed on the shortest path from the ingress node to the egress node.<br> If there are two shortest paths, <strong>the path which order fits the ring definition will be kept.</strong>
+    Each flow will be routed on the <strong>shortest path from the <strong>ingress node</strong> (starting point of the traffic) to the <strong>egress node</strong> (exit point of the traffic).<br> If there are two shortest paths, <strong>the path which order fits the ring definition will be kept.</strong>
     Let's consider the following situation:<br>
 </p>
 
@@ -47,27 +47,25 @@
 </p>
 
 <p>
-    The path from A to B (and vice versa) will be "A - G - B", because it uses only two links, while the path going the other way around ("A - E - F - C - B") uses five links.
-    However, there are two paths of equal length to go from A to C: "A - E - F - C" and "A - G - B - C". The first one, "A - E - F - C", will be kept: it is the same order as in the ring definition (AEFCBG").
-    The traffic from C to A will use the path "C - B - G - A": the routing is asymmetric in that case.
+    The path from <strong>A</strong> to <strong>B</strong> (and vice versa) will be <strong>"A - G - B"</strong>, because it uses only two links, while the path going the other way around <strong>("A - E - F - C - B")</strong> uses five links.<br>
+    However, there are two paths of equal length to go from <strong>A</strong> to <strong>C</strong>: <strong>"A - E - F - C"</strong> and <strong>"A - G - B - C"</strong>. The first one, <strong>"A - E - F - C"</strong>, will be kept: it is the <strong>same order</strong> as in the ring definition (<strong>"AEFCBG"</strong>).<br>
+    The traffic from <strong>C</strong> to <strong>A</strong> will use the path <strong>"C - B - G - A"</strong>: the routing is asymmetric in that case.<br>
 </p>
-<h3>Flow aggregation</h3>
+<h3></u>Flow aggregation</u></h3><br>
 <p>
     A traffic flow is represented as a couple <strong>(s, dr)</strong> where: 
-        <br><br>
 	<ol>
-		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- <strong>s</strong> is a string of length 2, containing the <strong>ingress node</strong> (starting point of the traffic) and the <strong>egress node</strong> (exit point of the traffic).</li>
-		<li style="padding-left: 10%; width: 80%;">- <strong>dr</strong> is the data rate in Gbps (gigabit per second).</li>
+		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- <strong>s</strong> is a string of length 2, containing the <strong>ingress node</strong> and the <strong>egress node</strong>.</li>
+		<li style="padding-left: 10%; width: 80%;">- <strong>dr</strong> is the data rate in <strong>Gbps</strong> (gigabit per second).</li>
 	</ol><br>
-    The data rate of a traffic flow will be counted for all the links of the shortest path. A traffic flow ("AB", 5) means that 5 Gbps will be routed on the shortest path from A to C. 
-    We will count 5 Gbps on the link "AG" and 5 Gbps on the link "GB". For a traffic flow ("CA", 15), we will count 15 Gbps on the links "CB", "BG", and "GA".
-    Given a list of traffic flows, we consider the resulting bandwidth for each link of the ring.
+    The data rate of a traffic flow will be counted for all the links of the shortest path.<br> A traffic flow <strong>("AB", 5)</strong> means that 5 Gbps will be routed on the shortest path from <strong>A</strong> to <strong>C</strong>. <br>
+    We will count 5 Gbps on the link <strong>"AG"</strong> and 5 Gbps on the link <strong>"GB"</strong>. For a traffic flow <strong>("CA", 15)</strong>, we will count 15 Gbps on the links <strong>"CB"</strong>, <strong>"BG"</strong>, and <strong>"GA"</strong>.<br>
+    Given a list of traffic flows, we consider the resulting bandwidth for each link of the ring.<br>
 </p>
 
-<h3>Ethernet links dimensioning</h3>
+<h3></u>Ethernet links dimensioning</u></h3><br>
 <p>
     There are five main types of Ethernet links used in mobile networks:
-            <br><br>
 	<ol>
 		<li style="padding-top: 8px; padding-left: 10%; width: 80%;">- <strong>Fast Ethernet</strong> (FE): 100 Mbps (or 0.1 Gbps) </li>
 		<li style="padding-left: 10%; width: 80%;">- <strong>Gigabit Ethernet</strong> (GE): 1 Gbps.</li>
@@ -77,13 +75,12 @@
 	</ol><br>
 </p>
 <p>
-    In order to define which type of link we use, we look for the smallest bandwidth allowing to carry the whole traffic with a single link.
-    Handling a 5-Gbps traffic would require 50 FE links, 5 GE links, or 1 10GE link. Therefore, a 10GE Ethernet link will be used.
-    For a 15-Gbps traffic, a 40GE Ethernet link would be required. For a traffic higher than 100 Gbps, we use 100GE Ethenet links.
-    For a 101-Gbps traffic, 2 100GE links would be required.
+    In order to define which type of link we use, we look for the smallest bandwidth allowing to carry the whole traffic with a single link.<br>
+    Handling a 5-Gbps traffic would require 50 FE links, 5 GE links, or 1 10GE link. Therefore, a 10GE Ethernet link will be used.<br>
+    For a 15-Gbps traffic, a 40GE Ethernet link is required. For a traffic higher than 100 Gbps, 100GE Ethenet links are used (2 100GE Ethernet links for a 101-Gbps flow).<br>
 </p>
 <p>
-    Given a ring and a list of traffic flows, you should return the number of Ethernet links of each type that are required to carry the resulting bandwidth:
+    Given a ring and a list of traffic flows, you should return the number of Ethernet links of each type that are required to carry the resulting bandwidth:<br>
 </p>
 
 <p style="text-align: center;">
@@ -96,18 +93,18 @@
 
 <br>
 <p>
-    In this example, we have 10 Gbps from E to C, 5 Gbps from A to C and 60 Gbps from A to B.
-    These traffic flows induce the following bandwidth: 15 Gbps from E to C, 5 Gbps from A to E and 60 Gbps from A to B.
-    The link dimensioning results in 2 100GE, 2 40GE and 1 10GE Ethernet links.
+    In this example, we have 10 Gbps from E to C, 5 Gbps from A to C and 60 Gbps from A to B.<br>
+    These traffic flows induce the following bandwidth: 15 Gbps from E to C, 5 Gbps from A to E and 60 Gbps from A to B.<br>
+    The link dimensioning results in 2 100GE, 2 40GE and 1 10GE Ethernet links.<br>
 </p>
 
 <p>
-    The result should be given as a list containing the number of links for each category, from 100GE to FE.
+    The result should be given as a list containing the number of links for each category, from 100GE to FE.<br>
     In our example, the result is [2, 2, 1, 0, 0]
 </p>
 
 <p>
-    <strong>Input: </strong> A variable number of arguments. The first one is a ring, represented as a string where each character is a node. 
+    <strong>Input: </strong> A variable number of arguments. The first one is a ring, represented as a string where each character is a node.<br> 
     The remaining arguments are traffic flows, represented as a couple (s, dr) where A is a 2-characters string (ingress node, egress node) and B is a positive value (traffic in Gbps).
 </p>
 
@@ -130,12 +127,12 @@ checkio("ABCDEFGH", ("AD", 4), ("EA", 41)) == [4, 0, 3, 0, 0]</pre>
 <br>
 <p class="for_info_only">
     <strong>How it is used: </strong>
-    Dimensioning is used for network planning and design.
+    Links dimensioning is used for network planning and design.
     For real networks, various softwares are used to dimension the network based on the expected traffic load (for pre-sales engineers, when the network does not yet exist), or traffic measurements (for post-sales engineers, to see how much traffic the network can handle). 
 </p>
 
 <p>
-    <strong>Precondition:</strong>
-    The ring is a valid ring (connex, 2-degree nodes).
-    The traffic is a positive value (integer or float).
+    <strong>Precondition:</strong><br>
+    The ring is a valid ring (connex, 2-degree nodes).<br>
+    The traffic is a positive value (integer or float).<br>
 </p>
