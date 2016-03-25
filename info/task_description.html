@@ -79,7 +79,8 @@
 <p>
     In order to define which type of link we use, we look for the smallest bandwidth allowing to carry the whole traffic with a single link.
     Handling a 5-Gbps traffic would require 50 FE links, 5 GE links, or 1 10GE link. Therefore, a 10GE Ethernet link will be used.
-    For a 15-Gbps traffic, a 40GE Ethernet link would be required.
+    For a 15-Gbps traffic, a 40GE Ethernet link would be required. For a traffic higher than 100 Gbps, we use 100GE Ethenet links.
+    For a 101-Gbps traffic, 2 100GE links would be required.
 </p>
 <p>
     Given a ring and a list of traffic flows, you should return the number of Ethernet links of each type that are required to carry the resulting bandwidth:
@@ -95,20 +96,23 @@
 
 <br>
 <p>
-    In this example, "d" is degrees, "m" is minutes, "s" is seconds as integers, while "X" is "N"
-    (north) or "S" (south) for a latitude and "W" (west) or "E" (east) for a longitude.
+    In this example, we have 10 Gbps from E to C, 5 Gbps from A to C and 60 Gbps from A to B.
+    These traffic flows induce the following bandwidth: 15 Gbps from E to C, 5 Gbps from A to E and 60 Gbps from A to B.
+    The link dimensioning results in 2 100GE, 2 40GE and 1 10GE Ethernet links.
 </p>
 
 <p>
-    The result should be given as a number in kilometers with a precision of ±0.1 (100 metres).
+    The result should be given as a list containing the number of links for each category, from 100GE to FE.
+    In our example, the result is [2, 2, 1, 0, 0]
 </p>
 
 <p>
-    <strong>Input: </strong> Two arguments. Coordinates as strings (unicode).
+    <strong>Input: </strong> A variable number of arguments. The first one is a ring, represented as a string where each character is a node. 
+    The remaining arguments are traffic flows, represented as a couple (A, B) where A is a 2-characters string (ingress node, egress node) and B is a integer (traffic in Gbps).
 </p>
 
 <p>
-    <strong>Output: </strong> The distance as a number (int or float).
+    <strong>Output: </strong> A list with 5 integers, one per type of link, in decreasing order of bandwidth capacity. 
 </p>
 
 
