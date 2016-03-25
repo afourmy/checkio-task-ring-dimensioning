@@ -43,7 +43,7 @@ api.add_listener(
             'python-3': cover_codes.unwrap_args
         },
         checker=checkers.float_comparison(1),
-        function_name="distance"
+        function_name="checkio"
         # add_allowed_modules=[],
         # add_close_builtins=[],
         # remove_allowed_modules=[]
