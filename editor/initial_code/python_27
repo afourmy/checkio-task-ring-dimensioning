@@ -1,6 +1,6 @@
 ETHERNET = (100, 40, 10, 1, 0.1) # Ethernet bandwidth capacity in Gbps
 
-def checkio():
+def checkio(ring, *flows):
     pass
 
 if __name__ == '__main__':
